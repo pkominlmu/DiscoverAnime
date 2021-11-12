@@ -17,3 +17,5 @@ This is a blog app created and used by Paul Komin and Andrew Hiebert.
     - Like articles
 - If you are not Paul or Andrew:
     - Attempting to submit an article will result in an error message.
+# Link to website:
+- https://blog-6134e.web.app/
