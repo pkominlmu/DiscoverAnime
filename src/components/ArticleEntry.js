@@ -32,14 +32,14 @@ export default function ArticleEntry({ addArticle }) {
   }
 
   return (
-    <div>
+    <div className="articleEntry">
       <form onSubmit={submit}>
         {error && <p className="error">{error}</p>}
         Title:
         <input value={title} onChange={(e) => setTitle(e.target.value)} />
         Body:
         <textarea
-          rows="8"
+          rows="10"
           value={body}
           onChange={(e) => setBody(e.target.value)}
         ></textarea>
@@ -47,7 +47,7 @@ export default function ArticleEntry({ addArticle }) {
         <input value={image_url} onChange={(e) => setImage_url(e.target.value)} />
         Video link (If you do not include one, an empty YouTube video will appear):
         <input value={video_url} onChange={(e) => setVideo_url(getYouTubeID(e.target.value))} />
-        <button type="submit" value={postedBy} onClick={(e) => setPostedBy(auth.currentUser.displayName)}>Create your post!</button>
+        <button type="submit" className="createButton" value={postedBy} onClick={(e) => setPostedBy(auth.currentUser.displayName)}>Create your post!</button>
       </form>
     </div>
   );

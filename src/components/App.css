@@ -1,9 +1,10 @@
 .App {
   display: grid;
   grid-template-rows: min-content auto;
-  grid-template-columns: 250px auto;
+  grid-template-columns: 210px auto;
   height: 100vh;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 header {
@@ -50,7 +51,7 @@ header .Buttons {
 
 .SignOutButton {
   display: flex;
-  text-align: end;
+  align-items: flex-end;
 }
 
 body {
@@ -61,34 +62,54 @@ body {
 }
 
 .Welcome {
+  background: url('../../src/welcomegif.gif') no-repeat;
   font-size: 30px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: white;
   text-align: center;
-  background-color: rgba(220, 20, 60, 0.25);
+  background-size: 100%;
+  background-color: rgba(174, 0, 255, 0.25);
   padding: 30px;
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
-
 }
 
 form {
-  padding: 8px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background-color: rgba(174, 0, 255, 0.25);
+  color:rgb(174, 0, 255);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  text-align: center;
+  padding-top: 75px;
+  padding-bottom: 500px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  font-size: 30px;
 }
 
 form input,
 form textarea {
-  margin-bottom: 10px;
-  width: 300px;
+  background-color: rgba(174, 0, 255, 0.25);
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  margin-bottom: 15px;
+  width: 600px;
+  size: 150%;
+  font-size: 25px;
+}
+
+form .createButton {
+  font-size: 20px;
+  background-color: blueviolet;
+  padding: 5px 5px;
 }
 
 nav,
 article {
-  background: rgba(220, 20, 60, 0.25);
+  background: rgba(174, 0, 255, 0.25);
   height: 100%;
 }
 
@@ -107,7 +128,7 @@ nav p:hover {
 }
 
 article .title {
-  background: rgba(220, 20, 60, 0.25);
+  background: rgba(174, 0, 255, 0.25);
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 0;
@@ -121,7 +142,7 @@ article .title {
 }
 
 article .date {
-  background: rgba(220, 20, 60, 0.25);
+  background: rgba(174, 0, 255, 0.25);
   font-size: 20px;
   margin-top: 0;
   margin-left: 0;
@@ -133,7 +154,7 @@ article .date {
 }
 
 article .postedBy {
-  background: rgba(220, 20, 60, 0.25);
+  background: rgba(174, 0, 255, 0.25);
   font-size: 20px;
   margin-top: 0;
   margin-left: 0;
@@ -146,8 +167,9 @@ article .postedBy {
 }
 
 article .likes {
-  background: rgba(220, 20, 60, 0.25);
+  background: rgba(174, 0, 255, 0.25);
   font-size: 20px;
+  font-weight: bold;
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 0;
@@ -157,22 +179,27 @@ article .likes {
 }
 
 article .body {
-  background:rgba(174, 0, 255, 0.25);
-  font-size: 25px;
+  background:rgba(114, 0, 167, 0.15);
+  font-weight: bold;
+  font-size: 35px;
+  text-align: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
   margin-top: 0;
   margin-left: 0;
   margin-bottom: 0;
-  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 15px;
   color: white;
 }
 
 article .image {
-  background:rgba(174, 0, 255, 0.25);
+  background:rgba(114, 0, 167, 0.15);
   text-align: center;
-  padding-top: 7px;
+  padding-top: 10px;
   padding-left: 2px;
   padding-right: 2px;
-  padding-bottom: 5px;
+  padding-bottom: 25px;
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
@@ -180,12 +207,12 @@ article .image {
 }
 
 article .video {
-  background:rgba(174, 0, 255, 0.25);
+  background:rgba(114, 0, 167, 0.15);
   text-align: center;
   padding-top: 0px;
   padding-left: 2px;
   padding-right: 2px;
-  padding-bottom: 20px;
+  padding-bottom: 150px;
   margin-top: 0;
   margin-left: width/2 + 1280px;
   margin-right: 0;

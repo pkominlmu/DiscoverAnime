@@ -1,5 +1,6 @@
 import YouTube from "react-youtube"
 export default function Article({ article }) {
+  //const target = document.getElementById("YTvideo");
   const opts = {
     height: "780",
     width: "1280",
@@ -15,11 +16,15 @@ export default function Article({ article }) {
     }
   }
 
-  //function hideUnusedVideo() {
-  //  if (this.article.video_url == "") {
-  //    document.getElementById("YTvideo").style.display = "none";
-  //  }
-  //}
+  /*function hideVideo() {
+    if (target.style.display != "none") {
+      target.style.display = "none";
+    } else {
+      target.style.display = "flex";
+    }
+  }
+  <div className="videoButton"><button onClick={() => hideVideo()}>Click to Hide Video</button></div>
+  */
 
   return (
     <article>
