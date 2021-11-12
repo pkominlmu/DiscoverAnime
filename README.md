@@ -12,6 +12,8 @@ This is a blog app created and used by Paul Komin and Andrew Hiebert.
     - Articles with Title and Body in plain text
     - Images from URL
     - YouTube videos from URL
+    - Display of what day, month, year, and time we posted the articles
+    - Display of which one of us posted a specific article
 - Anyone is able to:
     - Read and navigate to differnet articles
     - Like articles
