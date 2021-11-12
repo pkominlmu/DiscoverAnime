@@ -1,12 +1,11 @@
 // This service completely hides the data store from the rest of the app.
 // No other part of the app knows how the data is stored. If anyone wants
 // to read or write data, they have to go through this service.
-
 import { db } from "../firebaseConfig"
 import { collection, query, getDocs, addDoc, orderBy, limit, Timestamp } from "firebase/firestore"
 
-export async function createArticle({ title, body }) {
-  const data = { title, body, date: Timestamp.now() }
+export async function createArticle({ title, body, postedBy, image_url, video_url }) {
+  const data = { title, body, postedBy, image_url, video_url, likes: 0, date: Timestamp.now() }
   const docRef = await addDoc(collection(db, "articles"), data)
   return { id: docRef.id, ...data }
 }

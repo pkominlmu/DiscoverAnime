@@ -9,8 +9,12 @@ export function SignIn() {
 export function SignOut() {
   return (
     <div>
-      Hello, {auth.currentUser.displayName} &nbsp;
-      <button onClick={() => signOut(auth)}>Sign Out</button>
+      <div className="Greeting">
+        Hello, {auth.currentUser.displayName}! &nbsp;
+      </div>
+      <div className="SignOutButton">
+        <button onClick={() => signOut(auth)}>Sign Out</button>
+      </div>
     </div>
   );
 }

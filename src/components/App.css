@@ -9,14 +9,72 @@
 header {
   display: flex;
   justify-content: space-between;
-  background-color: black;
+  background-color: crimson;
   color: white;
   grid-column: 1 / span 2;
-  padding: 10px 5px;
+  padding: 20px 10px;
+}
+
+header .Title {
+  font-family: impact;
+  font-size: 50px;
+  font-style: italic;
+  color: deepskyblue;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+
+header .Title:hover + nav {
+  text-align: center;
+  display: flex;
+  margin: 0;
+  cursor: pointer;
+}
+
+header .Buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 1px;
+  grid-column: 1 / span 2;
+  background-color: deepskyblue;
+  border:rgb(174, 0, 255);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.Greeting {
+  font-size: 20px;
+  font-weight: bold;
+  color:rgb(174, 0, 255);
+}
+
+.SignOutButton {
+  display: flex;
+  text-align: end;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url('../../src/backgroundgif.gif') no-repeat;
+  background-size: 100%;
+}
+
+.Welcome {
+  font-size: 30px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: white;
+  text-align: center;
+  background-color: rgba(220, 20, 60, 0.25);
+  padding: 30px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+
 }
 
 form {
-  padding: 10px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -30,12 +88,17 @@ form textarea {
 
 nav,
 article {
+  background: rgba(220, 20, 60, 0.25);
   height: 100%;
-  padding: 10px;
 }
 
 nav {
-  background-color: #dee9ff;
+  background-color: rgba(220, 20, 60, 0.5);
+  color:rgb(255, 255, 255);
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: oblique;
 }
 
 nav p:hover {
@@ -43,13 +106,92 @@ nav p:hover {
   cursor: pointer;
 }
 
+article .title {
+  background: rgba(220, 20, 60, 0.25);
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-left: 10px;
+  padding-bottom: 3px;
+  font-size: 55px;
+  color:rgb(174, 0, 255);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+
 article .date {
+  background: rgba(220, 20, 60, 0.25);
+  font-size: 20px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-left: 10px;
+  padding-bottom: 3px;
   font-style: italic;
+  color: rgba(255, 255, 255, 0.699);
+}
+
+article .postedBy {
+  background: rgba(220, 20, 60, 0.25);
+  font-size: 20px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  font-style: italic;
+  font-weight: bold;
+  color: deepskyblue;
+}
+
+article .likes {
+  background: rgba(220, 20, 60, 0.25);
+  font-size: 20px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  color: crimson;
 }
 
 article .body {
-  white-space: break-spaces;
+  background:rgba(174, 0, 255, 0.25);
+  font-size: 25px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-left: 20px;
+  color: white;
 }
+
+article .image {
+  background:rgba(174, 0, 255, 0.25);
+  text-align: center;
+  padding-top: 7px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+article .video {
+  background:rgba(174, 0, 255, 0.25);
+  text-align: center;
+  padding-top: 0px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 20px;
+  margin-top: 0;
+  margin-left: width/2 + 1280px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
 
 .error {
   background-color: red;

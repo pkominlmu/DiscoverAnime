@@ -24,8 +24,8 @@ export default function App() {
 
   // Update the "database" *then* update the internal React state. These
   // two steps are definitely necessary.
-  function addArticle({ title, body }) {
-    createArticle({ title, body }).then((article) => {
+  function addArticle({ title, body, postedBy, image_url, video_url }) {
+    createArticle({ title, body, postedBy, image_url, video_url }).then((article) => {
       setArticle(article)
       setArticles([article, ...articles])
       setWriting(false)
@@ -35,9 +35,13 @@ export default function App() {
   return (
     <div className="App">
       <header>
-        Blog!
-        {user && <button onClick={() => setWriting(true)}>New Article</button>}
+        <div className="Title">
+        Komin and Hiebert Blog!
+        </div>
+        <div className="Buttons">
+        {user && <button onClick={() => setWriting(true)}>Create an Article</button>}
         {!user ? <SignIn /> : <SignOut />}
+        </div>
       </header>
 
       {!user ? "" : <Nav articles={articles} setArticle={setArticle} />}
