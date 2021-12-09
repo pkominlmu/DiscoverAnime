@@ -1,58 +1,60 @@
-import { useEffect, useState } from "react"
-import Nav from "./Nav"
-import Article from "./Article"
-import ArticleEntry from "./ArticleEntry"
-import { SignIn, SignOut, useAuthentication } from "../services/authService"
-import { fetchArticles, createArticle } from "../services/articleService"
-import "./App.css"
+import "./App.css";
+import { useState, useEffect } from "react";
+import Title from "./Title";
+import Nav from './Nav';
+import Form from "./Form";
+import { SignIn, SignOut, useAuthentication } from "../services/authService";
 
 export default function App() {
-  const [articles, setArticles] = useState([])
-  const [article, setArticle] = useState(null)
-  const [writing, setWriting] = useState(false)
-  const user = useAuthentication()
+  const [animeList, setAnimeList] = useState([]);
+  const [topAnime, SetTopAnime] = useState([]);
+  const [search, setSearch] = useState("");
+  const user = useAuthentication();
 
-  // This is a trivial app, so just fetch all the articles only when
-  // a user logs in. A real app would do pagination. Note that
-  // "fetchArticles" is what gets the articles from the service and
-  // then "setArticles" writes them into the React state.
+  const GetTopAnime = async () => {
+	const temp = await fetch(`https://api.jikan.moe/v3/top/anime/1/bypopularity`)
+		.then(res => res.json());
+
+	SetTopAnime(temp.top.slice(0, 8));
+}
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    fetchAnime(search);
+  };
+
+  const fetchAnime = async (name) => {
+    const search = await fetch(
+      `https://api.jikan.moe/v3/search/anime?q=${name}&page=1&order_by=member&sort=asc&limit=10`
+    ).then((res) => res.json());
+
+    setAnimeList(search.results);
+  };
+
   useEffect(() => {
     if (user) {
-      fetchArticles().then(setArticles)
+      GetTopAnime();
     }
-  }, [user])
-
-  // Update the "database" *then* update the internal React state. These
-  // two steps are definitely necessary.
-  function addArticle({ title, body, postedBy, image_url, video_url }) {
-    createArticle({ title, body, postedBy, image_url, video_url }).then((article) => {
-      setArticle(article)
-      setArticles([article, ...articles])
-      setWriting(false)
-    })
-  }
+  }, [user]);
 
   return (
     <div className="App">
-      <header>
-        <div className="Title">
-        Komin and Hiebert Blog!
-        </div>
-        <div className="Buttons">
-        {user && <button onClick={() => setWriting(true)}>Create an Article</button>}
-        {!user ? <SignIn /> : <SignOut />}
-        </div>
-      </header>
-
-      {!user ? "" : <Nav articles={articles} setArticle={setArticle} />}
-
-      {!user ? (
-        ""
-      ) : writing ? (
-        <ArticleEntry addArticle={addArticle} />
-      ) : (
-        <Article article={article} />
-      )}
+      <Title />
+    <div className="userLogin">
+    {!user ? <SignIn /> : <SignOut />}
     </div>
-  )
+	  <div className="Sidebar">
+	  <Nav 
+		  topAnime={topAnime} />
+	  </div>
+      <div className="allContent">
+        <Form
+          handleSearch={handleSearch}
+          search={search}
+          setSearch={setSearch}
+          animeList={animeList}
+        />
+      </div>
+    </div>
+  );
 }
