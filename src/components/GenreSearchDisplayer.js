@@ -1,13 +1,6 @@
 import React from "react";
 export default function GenreSearchDisplayer({ anime, addWatchlistItem }) {
     /*
-    const [mal_id, setMal_Id] = useState("");
-    const [score, setScore] = useState("");
-    const [rated, setRated] = useState("");
-    const [episodes, setEpisodes] = useState("");
-    const [link_url, setLink_Url] = useState("");
-    const [image_url, setImage_Url] = useState("");
-    const [synopsis, setSynopsis] = useState("");
     const [title, setTitle] = useState("");
   
     function submit(e) {
@@ -15,11 +8,37 @@ export default function GenreSearchDisplayer({ anime, addWatchlistItem }) {
       addWatchlistItem({ mal_id, score, rated, episodes, link_url, image_url, synopsis, title });
     }
     */
+
+    function setEndorsements (members) {
+        let counter = 0;
+        let membersString = "" + members;
+        if (membersString.length <= 3) {
+            return membersString;
+        } else {
+            for (var i = membersString.length - 1; i >= 0; i--) {
+                counter++;
+                if (counter == 3 || counter == 6) {
+                    if (membersString.length == 7 && counter == 6) {
+                        return membersString;
+                    } else {
+                        membersString = membersString.substring(0, i) + "," + membersString.substring(i, membersString.length);
+                    }
+                }
+            }
+        }
+        return membersString;
+    }
+
+    function setDescription (synopsis) {
+        let synopsisString = "" + synopsis;
+        synopsisString = synopsisString.substring(0, (synopsisString.length - 24));
+        return synopsisString;
+    }
   
     return (
       <article className="anime-displayer">
           <div className="anime-score">
-            Viewer Score: <strong>{anime.score}/10</strong> Fans: <strong>{anime.members}</strong>
+            Viewer Score: <strong>{anime.score}/10</strong> Endorsements: <strong>{setEndorsements(anime.members)}</strong>
           </div>
           <div className="anime-type">
               Type: <strong>{anime.type}</strong>
@@ -39,12 +58,12 @@ export default function GenreSearchDisplayer({ anime, addWatchlistItem }) {
             <strong>| {anime.title} |</strong>
           </h2>
           <div className="anime-desc">
-            <strong>Description:</strong> {anime.synopsis}
+            <strong>Description:</strong> {setDescription(anime.synopsis)}
           </div>
           <nav className="watchlist-button" /*</article>onSubmit={submit}*/>
-            <button onClick={(e) => console.log(anime.mal_id+"", anime.score, anime.rated, anime.episodes, anime.url)/*setMal_Id(anime.mal_id), setScore(anime.score), setRated(anime.rated),
+            <button onClick={(e) => console.log(anime.mal_id, anime.title)/*setMal_Id(anime.mal_id), setScore(anime.score), setRated(anime.rated),
                                     setEpisodes(anime.episodes), setLink_Url(link_url), setImage_Url(anime.image_url),
-                                    setSynopsis(anime.synopsis), setTitle(anime.title)*/}> Add to Watchlist</button>
+                                    setSynopsis(anime.synopsis), setTitle(anime.title)*/}> Add to Watchlist </button>
           </nav>
       </article>
     );

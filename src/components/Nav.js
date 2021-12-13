@@ -1,5 +1,6 @@
 import React from 'react'
 import UserWatchList from './UserWatchlist'
+import { auth } from '../firebaseConfig'
 
 export default function Nav({ topAnime }) {
 	return (
@@ -17,7 +18,7 @@ export default function Nav({ topAnime }) {
 								rel="noreferrer">
 								{ anime.title }
 							</a>
-						<button onClick={(e) => console.log(anime.title, anime.mal_id)}>Add to Watchlist</button> 
+						<button onClick={(e) => console.log(anime.title, auth.currentUser.uid)}>Add to Watchlist</button> 
 					</div>
 				))}
 			</nav>

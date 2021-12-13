@@ -5,19 +5,38 @@ import Nav from './Nav';
 import TitleSearch from "./TitleSearch";
 import GenreSearch from "./GenreSearch";
 import { SignIn, SignOut, useAuthentication } from "../services/authService";
+import { fetchWatchlistItems, createWatchlistItem } from "../services/watchlistService";
 import UserWatchlist from "./UserWatchlist";
 
 export default function App() {
-  const [animeList, setAnimeList] = useState([]);
-  const [genreAnimeList, setGenreAnimeList] = useState([]);
   const [topAnime, SetTopAnime] = useState([]);
+  const [searchAnimeList, setSearchAnimeList] = useState([]);
+  const [genreAnimeList, setGenreAnimeList] = useState([]);
+  const [watchlistAnimeList, setWatchlistAnimeList] = useState([]);
+  const [recommendedAnimeList, setRecommendedAnimeList] = useState([]);
   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("");
+  const [watchlistAnime, setWatchlistAnime] = useState("");
   const [recommended, setRecommended] = useState("");
   const [showWatchlist, setShowWatchlist] = useState(false);
   const [showTitleSearch, setShowTitleSearch] = useState(false);
   const [showGenreSearch, setShowGenreSearch] = useState(false);
+  const [watchlistItems, setWatchlistItems] = useState([]);
+  const [watchlistItem, setWatchlistItem] = useState(null);
   const user = useAuthentication();
+
+  useEffect(() => {
+    if (user) {
+      fetchWatchlistItems().then(setWatchlistItems);
+    }
+  }, [user])
+
+  function addWatchlistItem({ title, postedBy }) {
+    createWatchlistItem({ title, postedBy }).then((watchlistItem) => {
+      setWatchlistItem(watchlistItem)
+      setWatchlistItems([watchlistItem, ...watchlistItems])
+    })
+  }
 
   const GetTopAnime = async () => {
 	const temp = await fetch(`https://api.jikan.moe/v3/top/anime/1/bypopularity`)
@@ -36,6 +55,11 @@ export default function App() {
     fetchAnimeByGenre(genre);
   };
 
+  const handleWatchlist = (e) => {
+    e.preventDefault();
+    fetchWatchlistAnime(watchlistAnime);
+  };
+
   const handleRecommended = (e) => {
     e.preventDefault();
     fetchRecommendedAnime(recommended);
@@ -45,7 +69,7 @@ export default function App() {
     const search = await fetch(`https://api.jikan.moe/v3/search/anime?q=${name}&page=1&order_by=title&sort=desc&limit=10`)
       .then((res) => res.json());
 
-    setAnimeList(search.results);
+    setSearchAnimeList(search.results);
   };
 
   const fetchAnimeByGenre = async (genreID) => {
@@ -55,11 +79,18 @@ export default function App() {
     setGenreAnimeList(genre.anime.slice(0, 25));
   };
 
+  const fetchWatchlistAnime = async (title) => {
+    const watchlistAnime = await fetch(`https://api.jikan.moe/v3/search/anime?q=${title}&page=1&order_by=title&sort=asc&limit=1`)
+      .then((res) => res.json());
+
+    setWatchlistAnimeList(watchlistAnime.results);
+  }
+
   const fetchRecommendedAnime = async (malID) => {
     const recommended = await fetch(`https://api.jikan.moe/v3/anime/${malID}/recommendations`)
       .then((res) => res.json());
 
-    setAnimeList(recommended.recommendations.slice(0, 15));
+    setRecommendedAnimeList(recommended.recommendations.slice(0, 25));
   };
 
   useEffect(() => {
@@ -103,10 +134,19 @@ export default function App() {
           handleSearch={handleSearch}
           search={search}
           setSearch={setSearch}
-          animeList={animeList}
+          searchAnimeList={searchAnimeList}
+          addWatchlistItem={addWatchlistItem}
         />) : showWatchlist ? (
             <nav className="userWatchList">
-            <UserWatchlist/>
+            <UserWatchlist
+            watchlistItem={watchlistItem}
+            watchlistItems={watchlistItems}
+            setWatchlistItem={setWatchlistItem}
+            handleWatchlist={handleWatchlist}
+            watchlistAnime={watchlistAnime}
+            setWatchlistAnime={setWatchlistAnime}
+            watchlistAnimeList={watchlistAnimeList}
+            />
             </nav>
           ) : showGenreSearch ? (
             <GenreSearch
@@ -114,6 +154,7 @@ export default function App() {
             genre={genre}
             setGenre={setGenre}
             genreAnimeList={genreAnimeList}
+            addWatchlistItem={addWatchlistItem}
           />) : (
             <div className="Instructor">Please select a search method to start discovering!</div>
           )}
