@@ -80,10 +80,10 @@ export default function App() {
   };
 
   const fetchWatchlistAnime = async (title) => {
-    const watchlistAnime = await fetch(`https://api.jikan.moe/v3/search/anime?q=${title}&page=1&order_by=title&sort=asc&limit=1`)
+    const search = await fetch(`https://api.jikan.moe/v3/search/anime?q=${title}&page=1&order_by=title&sort=asc&limit=1`)
       .then((res) => res.json());
 
-    setWatchlistAnimeList(watchlistAnime.results);
+    setWatchlistAnimeList(search.results);
   }
 
   const fetchRecommendedAnime = async (malID) => {

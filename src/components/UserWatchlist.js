@@ -1,12 +1,13 @@
 import UserWatchlistDisplayer from "./UserWatchlistDisplayer";
 
 /*
-{props.watchlistAnimeList.map((watchlistItem) => (
-        <UserWatchlistDisplayer watchlistItem={watchlistItem} key={watchlistItem.mal_id}/>
+{props.watchlistAnimeList.map((anime) => (
+        <UserWatchlistDisplayer anime={anime} key={anime.mal_id}/>
       ))}
 */
 
-export default function UserWatchlist({ props, watchlistItems }) {
+
+export default function UserWatchlist({ props, watchlistItems}) {
   return (
     <main>
       <form>
@@ -14,7 +15,7 @@ export default function UserWatchlist({ props, watchlistItems }) {
           ? "No Watchlist Items"
           : watchlistItems.map((a) => (
               <p key={a.id} >
-                <button /*value={props.watchlistAnime} onClick={props.setWatchlistAnime(""+a.title)}*/>Click to get this Watchlist item ready for viewing!</button>
+                <button /*value={props.watchlistAnime} onClick={props.setWatchlistAnime(a.title)}*/>Click to get this Watchlist item ready for viewing!</button>
                 {a.postedBy}
                 {a.title}
               </p>
