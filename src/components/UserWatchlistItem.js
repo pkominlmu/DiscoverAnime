@@ -4,7 +4,7 @@ import UserWatchlistDisplayer from "./UserWatchlistDisplayer";
 export default function UserWatchlistItem ({ watchlistItem, handleWatchlist, watchlistAnime, setWatchlistAnime, watchlistAnimeList }) {
 return (
     <article>
-        {!watchlistItem ? ("Select a Watchlist Item to View!"
+        {!watchlistItem ? ("Select an Anime title to View! If there are none, you have no Watchlist Items."
         ) : watchlistItem.postedBy == auth.currentUser.uid ? (
             <div>
                 <form>
