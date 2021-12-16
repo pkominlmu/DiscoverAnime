@@ -1,9 +1,12 @@
 import React from "react";
 import { auth } from "../firebaseConfig";
+import { useState } from "react";
 export default function TitleSearchDisplayer({ anime, addWatchlistItem }) {
+  const [showButton, setShowButton] = useState(true);
   
   function submit(title, mal_id, postedBy) {
     addWatchlistItem({ title, mal_id, postedBy });
+    setShowButton(false);
   }
 
   return (
@@ -33,7 +36,9 @@ export default function TitleSearchDisplayer({ anime, addWatchlistItem }) {
           <strong>Description:</strong> {anime.synopsis}
         </div>
         <nav className="watchlist-button">
-          <button onClick={(e) => submit(anime.title, anime.mal_id, auth.currentUser.uid)}> Add to Watchlist</button>
+          {showButton ? (
+              <button onClick={(e) => submit(anime.title, anime.mal_id, auth.currentUser.uid)}> Add to Watchlist</button>
+            ) : ("")}
         </nav>
     </article>
   );

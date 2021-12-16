@@ -9,7 +9,7 @@ export async function createWatchlistItem({ title, mal_id, postedBy }) {
 
 export async function fetchWatchlistItems() {
   const snapshot = await getDocs(
-    query(collection(db, "watchlistItems"), orderBy("title", "asc"), limit(10))
+    query(collection(db, "watchlistItems"), orderBy("title", "asc"), limit(25))
   )
   return snapshot.docs.map((doc) => ({
     id: doc.id,
