@@ -1,6 +1,6 @@
 import React from "react";
 import GenreSearchDisplayer from "./GenreSearchDisplayer";
-export default function GenreSearch(props, addWatchlistItem) {
+export default function GenreSearch(props) {
     return (
         <main>
         <div className="genre-page">
@@ -44,7 +44,7 @@ export default function GenreSearch(props, addWatchlistItem) {
         </div>
         <div className="anime-list">
           {props.genreAnimeList.map((anime) => (
-            <GenreSearchDisplayer anime={anime} key={anime.mal_id} addWatchlistItem={addWatchlistItem} />
+            <GenreSearchDisplayer anime={anime} key={anime.mal_id} addWatchlistItem={props.addWatchlistItem} />
           ))}
         </div>
       </main>

@@ -1,13 +1,10 @@
 import React from "react";
+import { auth } from "../firebaseConfig";
 export default function GenreSearchDisplayer({ anime, addWatchlistItem }) {
-    /*
-    const [title, setTitle] = useState("");
-  
-    function submit(e) {
-      e.preventDefault();
-      addWatchlistItem({ mal_id, score, rated, episodes, link_url, image_url, synopsis, title });
-    }
-    */
+    
+  function submit(title, mal_id, postedBy) {
+    addWatchlistItem({ title, mal_id, postedBy });
+  }
 
     function setEndorsements (members) {
         let counter = 0;
@@ -60,11 +57,9 @@ export default function GenreSearchDisplayer({ anime, addWatchlistItem }) {
           <div className="anime-desc">
             <strong>Description:</strong> {setDescription(anime.synopsis)}
           </div>
-          <nav className="watchlist-button" /*</article>onSubmit={submit}*/>
-            <button onClick={(e) => console.log(anime.mal_id, anime.title)/*setMal_Id(anime.mal_id), setScore(anime.score), setRated(anime.rated),
-                                    setEpisodes(anime.episodes), setLink_Url(link_url), setImage_Url(anime.image_url),
-                                    setSynopsis(anime.synopsis), setTitle(anime.title)*/}> Add to Watchlist </button>
-          </nav>
+        <nav className="watchlist-button">
+          <button onClick={(e) => submit(anime.title, anime.mal_id, auth.currentUser.uid)}> Add to Watchlist</button>
+        </nav>
       </article>
     );
   }

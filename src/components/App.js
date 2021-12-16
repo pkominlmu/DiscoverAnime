@@ -4,20 +4,19 @@ import Title from "./Title";
 import Nav from './Nav';
 import TitleSearch from "./TitleSearch";
 import GenreSearch from "./GenreSearch";
+import UserWatchlist from "./UserWatchlist";
 import { SignIn, SignOut, useAuthentication } from "../services/authService";
 import { fetchWatchlistItems, createWatchlistItem } from "../services/watchlistService";
-import UserWatchlist from "./UserWatchlist";
+
 
 export default function App() {
   const [topAnime, SetTopAnime] = useState([]);
   const [searchAnimeList, setSearchAnimeList] = useState([]);
   const [genreAnimeList, setGenreAnimeList] = useState([]);
   const [watchlistAnimeList, setWatchlistAnimeList] = useState([]);
-  const [recommendedAnimeList, setRecommendedAnimeList] = useState([]);
   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("");
   const [watchlistAnime, setWatchlistAnime] = useState("");
-  const [recommended, setRecommended] = useState("");
   const [showWatchlist, setShowWatchlist] = useState(false);
   const [showTitleSearch, setShowTitleSearch] = useState(false);
   const [showGenreSearch, setShowGenreSearch] = useState(false);
@@ -31,8 +30,8 @@ export default function App() {
     }
   }, [user])
 
-  function addWatchlistItem({ title, postedBy }) {
-    createWatchlistItem({ title, postedBy }).then((watchlistItem) => {
+  function addWatchlistItem({ title, mal_id, postedBy }) {
+    createWatchlistItem({ title, mal_id, postedBy }).then((watchlistItem) => {
       setWatchlistItem(watchlistItem)
       setWatchlistItems([watchlistItem, ...watchlistItems])
     })
@@ -60,11 +59,6 @@ export default function App() {
     fetchWatchlistAnime(watchlistAnime);
   };
 
-  const handleRecommended = (e) => {
-    e.preventDefault();
-    fetchRecommendedAnime(recommended);
-  };
-
   const fetchAnimeByTitle = async (name) => {
     const search = await fetch(`https://api.jikan.moe/v3/search/anime?q=${name}&page=1&order_by=title&sort=desc&limit=10`)
       .then((res) => res.json());
@@ -80,18 +74,11 @@ export default function App() {
   };
 
   const fetchWatchlistAnime = async (title) => {
-    const search = await fetch(`https://api.jikan.moe/v3/search/anime?q=${title}&page=1&order_by=title&sort=asc&limit=1`)
+    const anime = await fetch(`https://api.jikan.moe/v3/search/anime?q=${title}&page=1&order_by=title&sort=desc&limit=6`)
       .then((res) => res.json());
 
-    setWatchlistAnimeList(search.results);
+    setWatchlistAnimeList(anime.results);
   }
-
-  const fetchRecommendedAnime = async (malID) => {
-    const recommended = await fetch(`https://api.jikan.moe/v3/anime/${malID}/recommendations`)
-      .then((res) => res.json());
-
-    setRecommendedAnimeList(recommended.recommendations.slice(0, 25));
-  };
 
   useEffect(() => {
     if (user) {
@@ -123,7 +110,10 @@ export default function App() {
                 setShowGenreSearch(false),
                 setShowTitleSearch(false)
               )}>Your Watchlist</button>
-              <Nav topAnime={topAnime}/>
+              <Nav 
+              topAnime={topAnime}
+              addWatchlistItem={addWatchlistItem}
+              />
             </nav>
           )}
       <div className="listContent">
@@ -139,9 +129,9 @@ export default function App() {
         />) : showWatchlist ? (
             <nav className="userWatchList">
             <UserWatchlist
-            watchlistItem={watchlistItem}
             watchlistItems={watchlistItems}
             setWatchlistItem={setWatchlistItem}
+            watchlistItem={watchlistItem}
             handleWatchlist={handleWatchlist}
             watchlistAnime={watchlistAnime}
             setWatchlistAnime={setWatchlistAnime}

@@ -1,8 +1,7 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import TitleSearchDisplayer from "./TitleSearchDisplayer";
 
-export default function TitleSearch(props, addWatchlistItem) {
+export default function TitleSearch(props) {
   return (
     <main>
       <div className="search-line">
@@ -19,7 +18,7 @@ export default function TitleSearch(props, addWatchlistItem) {
       </div>
       <div className="anime-list">
         {props.searchAnimeList.map((anime) => (
-          <TitleSearchDisplayer anime={anime} key={anime.mal_id} addWatchlistItem={addWatchlistItem}/>
+          <TitleSearchDisplayer anime={anime} key={anime.mal_id} addWatchlistItem={props.addWatchlistItem}/>
         ))}
       </div>
     </main>
