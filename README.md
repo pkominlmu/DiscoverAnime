@@ -15,7 +15,7 @@ This site provides the user with 3 different search methods for discovering anim
       - Page includes anime poster, title, url to MyAnimeList, and an add to watchlist button.
 - Your Watchlist Page:
   - Finally, the last method of discovery is through the recommended anime displayed on the "Your Watchlist" page, which displays all of the anime the user has added to their watchlist. By clicking on the anime titles listed there, they can then click on a button to see information about their watchlist anime, as well as recommended titles/seasons based off of their watchlist items.
-      - Page includes 10 anime that are related by title. Displays viewer score, TV/Movie rating, media type, episode count, url to MyAnimeList, anime poster, Title,      description, and an add to watchlist button. Watchlist item titles/mal_ids/postedBy user codes are all stored through Firebase Firestore. Only the user who added them to their list can see them.
+      - Page includes 10 anime that are related. Displays viewer score, TV/Movie rating, media type, episode count, url to MyAnimeList, anime poster, Title,      description, and an add to watchlist button. Watchlist item titles/mal_ids/postedBy user codes are all stored through Firebase Firestore. Only the user who added them to their list can see them.
 
 # Link to website:
 - https://webappfinal-efb92.web.app/
