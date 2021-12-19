@@ -10,7 +10,7 @@ This site provides the user with 3 different search methods for discovering anim
 - Search by Genre:
   - The second method of discovery is the "Search by Genre" page, through which users can find any anime of a certain genre. User must click a genre button and then the search button to see anime.
       - Page includes 25 anime that are the highest rated in their genre. Displays viewer score, endoresement number, media type, episode count, url to MyAnimeList, anime poster, Title, an extended description, and an add to watchlist button.
-- Navigation Colmumn/Top Anime
+- Navigation Column/Top Anime
   - The third method of discovery is through the navigation column on the far left, which displays all of the most popular anime.
       - Page includes anime poster, title, url to MyAnimeList, and an add to watchlist button.
 - Your Watchlist Page:
